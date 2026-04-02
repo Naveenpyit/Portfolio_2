@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Light (default html without .dark) */
+:root {
+  --bg-page: #f8fafc;
+  --bg-elevated: #ffffff;
+  --bg-input: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-subtle: rgb(15 23 42 / 0.1);
+  --header-bg: rgb(248 250 252 / 0.88);
+  --menu-mobile: #f1f5f9;
+  --card-bg: rgb(255 255 255 / 0.75);
+  --card-border: rgb(15 23 42 / 0.08);
+  --nav-pill: rgb(15 23 42 / 0.06);
+  --social-bg: rgb(15 23 42 / 0.04);
+  --social-border: rgb(15 23 42 / 0.1);
+  --ring-portrait: rgb(15 23 42 / 0.12);
+}
+
+.dark {
+  --bg-page: #07080f;
+  --bg-elevated: #0a0c14;
+  --bg-input: #0a0c14;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-subtle: rgb(255 255 255 / 0.08);
+  --header-bg: rgb(7 8 15 / 0.82);
+  --menu-mobile: #0a0c14;
+  --card-bg: rgb(255 255 255 / 0.03);
+  --card-border: rgb(255 255 255 / 0.1);
+  --nav-pill: rgb(255 255 255 / 0.1);
+  --social-bg: rgb(255 255 255 / 0.05);
+  --social-border: rgb(255 255 255 / 0.1);
+  --ring-portrait: rgb(255 255 255 / 0.1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply m-0 min-h-svh font-sans antialiased;
+    background-color: var(--bg-page);
+    color: var(--text-secondary);
+  }
+}
+
+@layer utilities {
+  .bg-page {
+    background-color: var(--bg-page);
+  }
+  .bg-elevated {
+    background-color: var(--bg-elevated);
+  }
+  .bg-input-field {
+    background-color: var(--bg-input);
+  }
+  .bg-header {
+    background-color: var(--header-bg);
+  }
+  .bg-menu-mobile {
+    background-color: var(--menu-mobile);
+  }
+  .text-heading {
+    color: var(--text-primary);
+  }
+  .text-body {
+    color: var(--text-secondary);
+  }
+  .text-muted-2 {
+    color: var(--text-muted);
+  }
+  .border-theme {
+    border-color: var(--border-subtle);
+  }
+  .bg-card {
+    background-color: var(--card-bg);
+  }
+  .border-card {
+    border-color: var(--card-border);
+  }
+  .bg-nav-active {
+    background-color: var(--nav-pill);
+  }
+  .bg-social {
+    background-color: var(--social-bg);
+  }
+  .border-social {
+    border-color: var(--social-border);
+  }
+}
