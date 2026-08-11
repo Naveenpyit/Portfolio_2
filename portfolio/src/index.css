@@ -5,43 +5,103 @@
 @theme {
   --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
 }
 
-/* Light (default html without .dark) */
+/* Light — warm off-white paper with a burnt-orange accent. The dark theme's
+   orange (#FF6B1A) is only ~3:1 on white, so light mode steps down to a
+   deeper burnt tone that clears 4.5:1 for body text and links. This mode is
+   an adaptation, not the reference design: the reference is dark-only, and
+   its glow-on-black character does not survive on paper. */
 :root {
-  --bg-page: #f8fafc;
+  --bg-page: #faf8f6;
   --bg-elevated: #ffffff;
-  --bg-input: #f1f5f9;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  --border-subtle: rgb(15 23 42 / 0.1);
-  --header-bg: rgb(248 250 252 / 0.88);
-  --menu-mobile: #f1f5f9;
-  --card-bg: rgb(255 255 255 / 0.75);
-  --card-border: rgb(15 23 42 / 0.08);
-  --nav-pill: rgb(15 23 42 / 0.06);
-  --social-bg: rgb(15 23 42 / 0.04);
-  --social-border: rgb(15 23 42 / 0.1);
-  --ring-portrait: rgb(15 23 42 / 0.12);
+  --bg-input: #f2efec;
+  --text-primary: #17120e;
+  --text-secondary: #57504a;
+  --text-muted: #6f6862;
+  --border-subtle: rgb(23 18 14 / 0.1);
+  --header-bg: rgb(250 248 246 / 0.88);
+  --menu-mobile: #f2efec;
+  --card-bg: #ffffff;
+  --card-border: rgb(23 18 14 / 0.09);
+  --nav-pill: rgb(23 18 14 / 0.06);
+  --social-bg: #ffffff;
+  --social-border: rgb(23 18 14 / 0.12);
+  --ring-portrait: rgb(194 65 12 / 0.3);
+
+  /* Accent — single hue. Every orange on the page is this one or a lightness
+     step of it; the design has no second hue anywhere. */
+  --accent: #c2410c;
+  --accent-strong: #9a3412;
+  --accent-soft: rgb(194 65 12 / 0.1);
+  --accent-line: rgb(194 65 12 / 0.35);
+  --accent-contrast: #ffffff;
+  --accent-face-top: #c2410c;
+  --accent-face-bottom: #9a3412;
+  --accent-highlight: rgb(255 255 255 / 0.18);
+  --accent-glow: rgb(194 65 12 / 0.25);
+  --dot: rgb(194 65 12 / 0.22);
+  /* Backdrop rule lines. Their own token, not --border-subtle: a border sits
+     against a card and wants to disappear, these sit on open page and want to
+     be seen. Tune visibility here — the element carries no extra opacity. */
+  --grid-line: rgb(120 120 130 / 0.22);
+
+  /* Elevation — three steps, each a contact + direct + ambient stack.
+     One flat shadow reads as a sticker; layered offsets read as height. */
+  --shadow-1: 0 1px 2px rgb(23 18 14 / 0.06), 0 2px 4px rgb(23 18 14 / 0.04);
+  --shadow-2:
+    0 1px 2px rgb(23 18 14 / 0.05), 0 4px 8px rgb(23 18 14 / 0.05),
+    0 12px 24px rgb(23 18 14 / 0.06);
+  --shadow-3:
+    0 2px 4px rgb(23 18 14 / 0.05), 0 8px 16px rgb(23 18 14 / 0.07),
+    0 24px 48px rgb(23 18 14 / 0.1);
+  --sheen: rgb(255 255 255 / 0.5);
 }
 
+/* Dark — the reference design. Pure black page, solid near-black cards
+   (translucency would muddy them against this ground), vivid orange. */
 .dark {
-  --bg-page: #07080f;
-  --bg-elevated: #0a0c14;
-  --bg-input: #0a0c14;
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --border-subtle: rgb(255 255 255 / 0.08);
-  --header-bg: rgb(7 8 15 / 0.82);
-  --menu-mobile: #0a0c14;
-  --card-bg: rgb(255 255 255 / 0.03);
-  --card-border: rgb(255 255 255 / 0.1);
-  --nav-pill: rgb(255 255 255 / 0.1);
-  --social-bg: rgb(255 255 255 / 0.05);
+  --bg-page: #0a0a0a;
+  --bg-elevated: #141414;
+  --bg-input: #101010;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #8a8a93;
+  --border-subtle: rgb(255 255 255 / 0.07);
+  --header-bg: rgb(10 10 10 / 0.85);
+  --menu-mobile: #141414;
+  --card-bg: #141414;
+  --card-border: rgb(255 255 255 / 0.08);
+  --nav-pill: rgb(255 255 255 / 0.06);
+  --social-bg: #141414;
   --social-border: rgb(255 255 255 / 0.1);
-  --ring-portrait: rgb(255 255 255 / 0.1);
+  --ring-portrait: rgb(255 107 26 / 0.35);
+
+  --accent: #ff6b1a;
+  --accent-strong: #ff8a3d;
+  --accent-soft: rgb(255 107 26 / 0.12);
+  --accent-line: rgb(255 107 26 / 0.35);
+  /* Near-black ink on the orange face, not white. White on #FF6B1A is 2.9:1
+     and fails AA at button sizes; this ink clears 6.8:1 on both stops. */
+  --accent-contrast: #1a0a00;
+  --accent-face-top: #ff7a2b;
+  --accent-face-bottom: #f05a00;
+  --accent-highlight: rgb(255 255 255 / 0.25);
+  --accent-glow: rgb(255 107 26 / 0.45);
+  --dot: rgb(255 107 26 / 0.28);
+  --grid-line: rgb(200 200 210 / 0.16);
+
+  /* A cast shadow is invisible on #0a0a0a, so dark mode buys its depth with
+     a top rim-light instead, plus a deeper cast for the outer edge. */
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.05);
+  --shadow-2:
+    0 2px 4px rgb(0 0 0 / 0.5), 0 8px 20px rgb(0 0 0 / 0.6),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+  --shadow-3:
+    0 4px 8px rgb(0 0 0 / 0.5), 0 16px 40px rgb(0 0 0 / 0.7),
+    inset 0 1px 0 rgb(255 255 255 / 0.09);
+  --sheen: rgb(255 255 255 / 0.3);
 }
 
 @layer base {
@@ -52,6 +112,12 @@
     @apply m-0 min-h-svh font-sans antialiased;
     background-color: var(--bg-page);
     color: var(--text-secondary);
+  }
+  /* Keyboard focus was invisible everywhere — inputs clear the outline and
+     buttons never had one. Mouse users are unaffected. */
+  :where(a, button, input, textarea):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 }
 
@@ -97,5 +163,170 @@
   }
   .border-social {
     border-color: var(--social-border);
+  }
+  .text-accent {
+    color: var(--accent);
+  }
+  .text-accent-strong {
+    color: var(--accent-strong);
+  }
+  .hover\:text-accent:hover {
+    color: var(--accent);
+  }
+  .hover\:text-accent-strong:hover {
+    color: var(--accent-strong);
+  }
+  .bg-accent {
+    background-color: var(--accent);
+  }
+  .bg-accent-soft {
+    background-color: var(--accent-soft);
+  }
+  .text-on-accent {
+    color: var(--accent-contrast);
+  }
+  .border-accent {
+    border-color: var(--accent);
+  }
+  .border-accent-line {
+    border-color: var(--accent-line);
+  }
+  .hover\:border-accent:hover {
+    border-color: var(--accent);
+  }
+  .focus\:border-accent:focus {
+    border-color: var(--accent);
+  }
+  .marker-accent > li::marker {
+    color: var(--accent);
+  }
+
+  /* Physical button face — one hue, lightness only. The inset highlight is
+     what makes it read as a surface instead of a flat fill. */
+  .btn-accent {
+    background-image: linear-gradient(
+      to bottom,
+      var(--accent-face-top),
+      var(--accent-face-bottom)
+    );
+    color: var(--accent-contrast);
+    box-shadow:
+      inset 0 1px 0 var(--accent-highlight),
+      0 1px 2px rgb(0 0 0 / 0.18);
+    transition: filter 0.2s ease, box-shadow 0.3s ease;
+  }
+  .btn-accent:hover {
+    filter: brightness(1.07);
+    box-shadow:
+      inset 0 1px 0 var(--accent-highlight),
+      0 4px 20px var(--accent-glow);
+  }
+  .btn-accent:active {
+    filter: brightness(0.96);
+  }
+  .btn-accent:disabled {
+    filter: none;
+    opacity: 0.5;
+  }
+  /* Secondary action — the reference pairs every filled orange CTA with a
+     bordered twin that only picks up the accent on hover. */
+  .btn-outline {
+    border: 1px solid var(--social-border);
+    color: var(--text-primary);
+    background-color: transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Scroll progress — accent to lighter accent, ~15deg of hue travel. */
+  .bar-accent {
+    background-image: linear-gradient(to right, var(--accent), var(--accent-strong));
+  }
+
+  /* Elevation steps. `depth-hover` promotes to the top step on hover — the
+     shadow growing is what sells the lift, not the transform alone. */
+  .depth-1 {
+    box-shadow: var(--shadow-1);
+  }
+  .depth-2 {
+    box-shadow: var(--shadow-2);
+  }
+  .depth-3 {
+    box-shadow: var(--shadow-3);
+  }
+  .depth-hover {
+    transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease;
+  }
+  .depth-hover:hover {
+    box-shadow: var(--shadow-3);
+    border-color: var(--accent-line);
+  }
+  /* Children of a tilting card need their own 3D context to sit on separate
+     Z planes; without preserve-3d they flatten into the parent's plane. */
+  .flat-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* Section eyebrow — a short accent rule, then caps at wide tracking. Every
+     section in the reference opens with this before its heading. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 1.75rem;
+    height: 2px;
+    background-color: var(--accent);
+  }
+
+  /* Cards wipe an accent rule across their top edge on hover. Needs the card
+     to clip, or the rule overhangs the rounded corners. */
+  .accent-edge::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background-image: linear-gradient(to right, var(--accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .accent-edge:hover::before {
+    transform: scaleX(1);
+  }
+
+  /* Corner texture. Kept to the accent hue at low alpha so it reads as
+     atmosphere rather than a second colour. */
+  .dot-matrix {
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    /* Holds full strength further out before fading, so the grid reads as a
+       surface rather than a smudge in the middle of the section. */
+    -webkit-mask-image: radial-gradient(#000 45%, #0000 85%);
+    mask-image: radial-gradient(#000 45%, #0000 85%);
+  }
+  /* The hero halo. Both an outer bloom and an inner one, so the portrait sits
+     inside the light rather than in front of it. */
+  .halo-ring {
+    border: 2px solid var(--accent);
+    box-shadow:
+      0 0 70px var(--accent-glow),
+      inset 0 0 70px var(--accent-glow);
   }
 }

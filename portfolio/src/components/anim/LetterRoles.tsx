@@ -27,7 +27,7 @@ export const LetterRoles = memo(function LetterRoles() {
 
   return (
     <span
-      className="inline-flex min-h-[1.35em] flex-wrap items-end font-display text-xl font-semibold text-cyan-700 sm:text-2xl md:text-3xl dark:text-cyan-300/95"
+      className="text-accent font-display inline-flex min-h-[1.35em] flex-wrap items-end text-xl font-semibold sm:text-2xl md:text-3xl"
       aria-live="polite"
     >
       {letters.map((ch, idx) => (
@@ -43,7 +43,7 @@ export const LetterRoles = memo(function LetterRoles() {
       ))}
       <motion.span
         aria-hidden
-        className="ml-0.5 inline-block h-[0.9em] w-0.5 translate-y-0.5 bg-cyan-600 dark:bg-cyan-400"
+        className="bg-accent ml-0.5 inline-block h-[0.9em] w-0.5 translate-y-0.5"
         animate={{ opacity: [1, 0.15, 1] }}
         transition={{ duration: 0.8, repeat: Infinity, ease: 'easeInOut' }}
       />

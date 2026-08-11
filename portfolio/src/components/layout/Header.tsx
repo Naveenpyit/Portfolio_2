@@ -37,30 +37,50 @@ export const Header = memo(function Header() {
   const items = useMemo(() => NAV, [])
 
   return (
-    <header className="border-theme fixed inset-x-0 top-0 z-50 border-b bg-header backdrop-blur-xl">
-      <motion.div className="h-0.5 origin-left bg-linear-to-r from-cyan-400 via-violet-500 to-fuchsia-500" style={{ scaleX: bar }} />
+    <header className="border-theme depth-2 fixed inset-x-0 top-0 z-50 border-b bg-header backdrop-blur-xl">
+      <motion.div className="bar-accent h-0.5 origin-left" style={{ scaleX: bar }} />
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-        <button type="button" onClick={() => navTo('home')} className="text-heading font-display text-lg font-semibold tracking-tight">
-          Portfolio
+        <button
+          type="button"
+          onClick={() => navTo('home')}
+          className="flex cursor-pointer items-center gap-2.5"
+          aria-label="Back to top"
+        >
+          <span className="btn-accent font-display grid h-8 w-8 place-items-center rounded-lg text-sm font-bold">
+            NM
+          </span>
+          <span className="text-heading font-display text-lg font-semibold tracking-tight">Portfolio</span>
         </button>
+
         <nav className="hidden items-center gap-1 md:flex">
           {items.map(({ id, label }) => (
             <button
               key={id}
               type="button"
               onClick={() => navTo(id)}
-              className={`rounded-full px-3 py-1.5 text-sm transition ${activeId === id ? 'bg-nav-active text-heading' : 'text-muted-2 hover:text-heading'
-                }`}
+              className={`relative cursor-pointer px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
+                activeId === id ? 'text-accent' : 'text-muted-2 hover:text-heading'
+              }`}
             >
               {label}
+              {/* One shared element slides between items rather than each item
+                  fading its own bar — the travel is what marks the change. */}
+              {activeId === id && (
+                <motion.span
+                  layoutId="nav-underline"
+                  className="bg-accent absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full"
+                  transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                />
+              )}
             </button>
           ))}
         </nav>
+
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={onTheme}
-            className="text-heading border-theme cursor-pointer hover:bg-nav-active rounded-full border p-2 transition-all duration-700"
+            className="text-heading border-social hover:border-accent hover:text-accent cursor-pointer rounded-lg border p-2 transition"
             aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
           >
             {theme === 'dark' ? <Sun /> : <Moon />}
@@ -71,13 +91,13 @@ export const Header = memo(function Header() {
           <button
             type="button"
             onClick={onResume}
-            className="rounded-full cursor-pointer bg-linear-to-r from-cyan-500 to-violet-600 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-cyan-500/20 transition hover:brightness-110"
+            className="border-accent text-accent hover:bg-accent-soft hidden cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-wider transition sm:inline-flex"
           >
-            Download CV
+            Download CV <span aria-hidden>↓</span>
           </button>
           <button
             type="button"
-            className="text-heading rounded-lg p-2 md:hidden cursor-pointer"
+            className="text-heading cursor-pointer rounded-lg p-2 md:hidden"
             aria-label="Menu"
             onClick={() => dispatch(setMenuOpen(!menuOpen))}
           >
@@ -87,11 +107,19 @@ export const Header = memo(function Header() {
           </button>
         </div>
       </div>
+
       {menuOpen && (
         <div className="border-theme bg-menu-mobile border-t px-4 py-3 md:hidden">
           <div className="flex flex-col gap-1">
             {items.map(({ id, label }) => (
-              <button key={id} type="button" className="text-heading rounded-lg py-2 text-left" onClick={() => navTo(id)}>
+              <button
+                key={id}
+                type="button"
+                className={`rounded-lg py-2 text-left text-sm font-semibold uppercase tracking-wider ${
+                  activeId === id ? 'text-accent' : 'text-heading'
+                }`}
+                onClick={() => navTo(id)}
+              >
                 {label}
               </button>
             ))}
